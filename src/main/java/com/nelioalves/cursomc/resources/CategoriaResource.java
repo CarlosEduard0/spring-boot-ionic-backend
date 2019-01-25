@@ -38,4 +38,10 @@ public class CategoriaResource {
         categoriaService.save(categoria);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping(path = "{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        categoriaService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
