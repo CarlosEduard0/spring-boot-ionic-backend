@@ -3,7 +3,6 @@ package com.nelioalves.cursomc.services;
 import com.nelioalves.cursomc.domain.Categoria;
 import com.nelioalves.cursomc.repositories.CategoriaRepository;
 import com.nelioalves.cursomc.services.exception.ObjectNotFoundException;
-import org.omg.PortableServer.POAPackage.ObjectAlreadyActive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
