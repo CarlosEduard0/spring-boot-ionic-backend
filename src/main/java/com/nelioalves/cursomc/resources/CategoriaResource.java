@@ -1,13 +1,17 @@
 package com.nelioalves.cursomc.resources;
 
 import com.nelioalves.cursomc.domain.Categoria;
+import com.nelioalves.cursomc.dto.CategoriaDTO;
 import com.nelioalves.cursomc.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.xml.ws.Response;
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/categorias")
@@ -18,6 +22,12 @@ public class CategoriaResource {
     @Autowired
     public CategoriaResource(CategoriaService categoriaService) {
         this.categoriaService = categoriaService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CategoriaDTO>> findAll() {
+        List<CategoriaDTO> lista = categoriaService.findAll().stream().map(CategoriaDTO::new).collect(Collectors.toList());
+        return ResponseEntity.ok().body(lista);
     }
 
     @GetMapping(path = "{id}")
