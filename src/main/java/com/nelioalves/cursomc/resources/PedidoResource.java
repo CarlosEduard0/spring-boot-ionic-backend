@@ -1,7 +1,6 @@
 package com.nelioalves.cursomc.resources;
 
-import com.nelioalves.cursomc.domain.Cliente;
-import com.nelioalves.cursomc.services.ClienteService;
+import com.nelioalves.cursomc.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,18 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/clientes")
-public class ClienteResource {
-    private final ClienteService clienteService;
+@RequestMapping("/pedidos")
+public class PedidoResource {
+    private final PedidoService pedidoService;
 
     @Autowired
-    public ClienteResource(ClienteService clienteService) {
-        this.clienteService = clienteService;
+    public PedidoResource(PedidoService pedidoService) {
+        this.pedidoService = pedidoService;
     }
 
     @GetMapping(path = "{id}")
     public ResponseEntity<?> find(@PathVariable Long id) {
-        Cliente cliente = clienteService.buscar(id);
-        return ResponseEntity.ok().body(cliente);
+        return ResponseEntity.ok().body(pedidoService.buscar(id));
     }
 }
