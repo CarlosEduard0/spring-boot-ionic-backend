@@ -1,5 +1,6 @@
 package com.nelioalves.cursomc.resources;
 
+import com.nelioalves.cursomc.domain.Pedido;
 import com.nelioalves.cursomc.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class PedidoResource {
     }
 
     @GetMapping(path = "{id}")
-    public ResponseEntity<?> find(@PathVariable Long id) {
-        return ResponseEntity.ok().body(pedidoService.buscar(id));
+    public ResponseEntity<Pedido> find(@PathVariable Long id) {
+        return ResponseEntity.ok().body(pedidoService.find(id));
     }
 }
