@@ -1,13 +1,14 @@
 package com.nelioalves.cursomc.domain.enums;
 
-public enum TipoCliente {
-    PESSOA_FISICA(1L, "Pessoa Física"),
-    PESSOA_JURIDICA(2L, "Pessoa Jurídica");
+public enum EstadoPagamento {
+    PENDENTE(1L, "Pendente"),
+    QUITADO(2L, "Quitado"),
+    CANCELADO(3L, "Cancelado");
 
     private Long id;
     private String descricao;
 
-    TipoCliente(Long id, String descricao) {
+    EstadoPagamento(Long id, String descricao) {
         this.id = id;
         this.descricao = descricao;
     }
@@ -19,12 +20,12 @@ public enum TipoCliente {
     public String getDescricao() {
         return descricao;
     }
-    
-    public static TipoCliente toEnum(Long id) {
+
+    public static EstadoPagamento toEnum(Long id) {
         if(id == null) return null;
-        for(TipoCliente tipoCliente : TipoCliente.values()) {
-            if(id.equals(tipoCliente.getId())) {
-                return tipoCliente;
+        for(EstadoPagamento estadoPagamento : EstadoPagamento.values()) {
+            if(id.equals(estadoPagamento.getId())) {
+                return estadoPagamento;
             }
         }
         throw new IllegalArgumentException("Id inválido: " + id);
