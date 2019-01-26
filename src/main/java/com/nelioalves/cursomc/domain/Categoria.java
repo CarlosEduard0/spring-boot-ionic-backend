@@ -1,5 +1,7 @@
 package com.nelioalves.cursomc.domain;
 
+import com.nelioalves.cursomc.dto.CategoriaDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,6 +23,11 @@ public class Categoria implements Serializable {
     public Categoria(Long id, String nome) {
         this.id = id;
         this.nome = nome;
+    }
+
+    public Categoria(CategoriaDTO categoriaDTO) {
+        id = categoriaDTO.getId();
+        nome = categoriaDTO.getNome();
     }
 
     public Long getId() {
