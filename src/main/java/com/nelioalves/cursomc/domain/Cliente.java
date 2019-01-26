@@ -3,6 +3,7 @@ package com.nelioalves.cursomc.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nelioalves.cursomc.domain.enums.TipoCliente;
 import com.nelioalves.cursomc.dto.ClienteDTO;
+import com.nelioalves.cursomc.dto.ClienteNewDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -41,6 +42,23 @@ public class Cliente implements Serializable {
     public Cliente(ClienteDTO clienteDTO) {
         nome = clienteDTO.getNome();
         email = clienteDTO.getEmail();
+    }
+
+    public Cliente(ClienteNewDTO clienteNewDTO) {
+        nome = clienteNewDTO.getNome();
+        email = clienteNewDTO.getEmail();
+        cpfOuCnpj = clienteNewDTO.getCpfOuCnpj();
+        tipo = clienteNewDTO.getTipo();
+        Cidade cidade = new Cidade(clienteNewDTO.getCidadeId(), null, null);
+        Endereco endereco = new Endereco(clienteNewDTO.getLogradouro(), clienteNewDTO.getNumero(), clienteNewDTO.getComplemento(), clienteNewDTO.getBairro(), clienteNewDTO.getCep(), this, cidade);
+        enderecos.add(endereco);
+        telefones.add(clienteNewDTO.getTelefone1());
+        if (clienteNewDTO.getTelefone2() != null) {
+            telefones.add(clienteNewDTO.getTelefone2());
+        }
+        if(clienteNewDTO.getTelefone3() != null) {
+            telefones.add(clienteNewDTO.getTelefone3());
+        }
     }
 
     public Long getId() {
