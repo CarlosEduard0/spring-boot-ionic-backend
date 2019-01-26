@@ -2,6 +2,7 @@ package com.nelioalves.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nelioalves.cursomc.domain.enums.TipoCliente;
+import com.nelioalves.cursomc.dto.ClienteDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -34,7 +35,12 @@ public class Cliente implements Serializable {
         this.nome = nome;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
-        this.tipo = tipo.getId();
+        this.tipo = tipo == null ? null : tipo.getId();
+    }
+
+    public Cliente(ClienteDTO clienteDTO) {
+        nome = clienteDTO.getNome();
+        email = clienteDTO.getEmail();
     }
 
     public Long getId() {
