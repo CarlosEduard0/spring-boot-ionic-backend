@@ -3,8 +3,10 @@ package com.nelioalves.cursomc.services;
 import com.nelioalves.cursomc.domain.Cliente;
 import com.nelioalves.cursomc.repositories.ClienteRepository;
 import com.nelioalves.cursomc.repositories.EnderecoRepository;
+import com.nelioalves.cursomc.services.exception.DataIntegrityException;
 import com.nelioalves.cursomc.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -46,6 +48,12 @@ public class ClienteService {
     }
 
     public void delete(Long id) {
+        find(id);
+        try {
+            clienteRepository.deleteById(id);
+        } catch(DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Não e possível excluir porque há pedidos relacionados");
+        }
         clienteRepository.deleteById(id);
     }
 
